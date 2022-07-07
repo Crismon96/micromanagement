@@ -1,0 +1,13 @@
+{
+  "name": "microservice-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compose:dev:up": "docker-compose -f ./docker-compose-dev.yml up -d",
+    "compose:dev:down": "docker-compose -f ./docker-compose-dev.yml down"
+  },
+  "author": "",
+  "license": "ISC"
+}
