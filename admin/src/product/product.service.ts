@@ -18,4 +18,12 @@ export class ProductService {
   async getSingleProduct(id: number) {
     return this.productRepository.findOne({ where: { id } });
   }
+
+  async updateProduct(id: number, product) {
+    return await this.productRepository.update(id, product);
+  }
+
+  async deleteProduct(id: number) {
+    return this.productRepository.delete(id);
+  }
 }
