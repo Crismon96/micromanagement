@@ -11,6 +11,19 @@ export class ProductService {
   ) {}
 
   async allProducts() {
-    return this.productModel.find();
+    return this.productModel.find().exec();
+  }
+  async createProduct(product) {
+    return new this.productModel(product).save();
+  }
+  async findProduct(id: number) {
+    return this.productModel.findOne({ id });
+  }
+  async updateProduct(data: any) {
+    console.log('data: ', data);
+    return this.productModel.findOneAndReplace({ id: data.id }, data).exec();
+  }
+  async deleteProduct(id: number) {
+    return this.productModel.deleteOne({ id });
   }
 }
