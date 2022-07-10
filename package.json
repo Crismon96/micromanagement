@@ -9,5 +9,8 @@
     "compose:dev:down": "docker-compose -f ./docker-compose-dev.yml down"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier-plugin-svelte": "^2.7.0"
+  }
 }

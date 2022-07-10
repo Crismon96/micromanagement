@@ -19,7 +19,6 @@ export class ProductController {
     console.log('product: ', title);
 
     const product = await this.productService.createProduct({ title, image });
-    console.log('product: ', product);
     this.client.emit('product_created', product);
 
     return product;
