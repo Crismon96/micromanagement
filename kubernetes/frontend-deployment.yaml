@@ -4,7 +4,7 @@ metadata:
   name: frontend-deployment
 spec:
   replicas: 1
-  selector: 
+  selector:
     matchLabels:
       app: frontend
   template:
@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: academind/kub-demo-frontend:latest
+          image: 683312808679.dkr.ecr.eu-central-1.amazonaws.com/fullerstack-frontend:latest

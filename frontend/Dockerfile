@@ -1,14 +1,23 @@
-FROM node:14-alpine as builder
+FROM node:18-alpine as builder
 
 WORKDIR /app
 
-COPY package.json .
+COPY --chown=node:node package*.json ./
 
-RUN npm install
+RUN npm ci
 
-COPY . .
+# Bundle app source
+COPY --chown=node:node . .
 
 RUN npm run build
+
+# Set NODE_ENV environment variable
+ENV NODE_ENV production
+
+# Running `npm ci` removes the existing node_modules directory and passing in --only=production ensures that only the production dependencies are installed. This ensures that the node_modules directory is as optimized as possible
+RUN npm ci --only=production && npm cache clean --force
+
+USER node
 
 FROM nginx:1.19-alpine
 

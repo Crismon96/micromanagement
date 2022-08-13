@@ -1,6 +1,24 @@
 version: '3.6'
 services:
-  db:
+  frontend:
+    build: ./frontend
+  main:
+    build: ./main
+    ports:
+      - '8080:8080'
+    depends_on:
+      - serviceName: mongodb
+      - serviceName: rabbitmq
+  admin:
+    build: ./admin
+    ports:
+      - '8081:8081'
+    depends_on:
+      - serviceName: mysql
+      - serviceName: rabbitmq
+
+  # DATABASES
+  mysql:
     image: mysql:8.0
     restart: always
     environment:
@@ -12,13 +30,20 @@ services:
       # Password for root access
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
       - '3306:3306'
     expose:
-      # Opens port 3306 on the container
       - '3306'
   mongodb:
     image: 'bitnami/mongodb:5.0'
     ports:
       - '27017:27017'
-# docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.10-management
+    expose:
+      - '3306'
+  rabbitmq:
+    image: 'rabbitmq:3.10-management'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    expose:
+      - '5672'
+      - '15672'
