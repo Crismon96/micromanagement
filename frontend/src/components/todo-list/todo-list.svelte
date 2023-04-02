@@ -1,31 +1,55 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	type Todo = {
 		id: number;
-		date: number;
+		date: Date;
 		text: string;
 		completed: boolean;
 	};
 
 	let todos: Todo[] = [];
-	let newTodo = '';
+	let newTodo: string = '';
 
-	function addTodo() {
+	async function getTodos() {
+		const response = await fetch('/api/todos');
+		todos = await response.json();
+	}
+
+	async function addTodo() {
 		if (newTodo.trim()) {
-			todos = [
-				...todos,
-				{ id: Math.random() * 100, date: Date.now(), text: newTodo.trim(), completed: false }
-			];
+			const response = await fetch('/api/todos', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ text: newTodo.trim() })
+			});
+
+			await getTodos();
+
 			newTodo = '';
 		}
 	}
 
-	function toggleTodo(id: number) {
-		todos = todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo));
+	async function toggleTodo(id: number) {
+		const response = await fetch(`/api/todos/${id}`, {
+			method: 'PATCH'
+		});
+
+		await getTodos();
 	}
 
-	function removeTodo(id: number) {
-		todos = todos.filter((todo) => todo.id !== id);
+	async function removeTodo(id: number) {
+		await fetch(`/api/todos/${id}`, {
+			method: 'DELETE'
+		});
+		await getTodos();
 	}
+
+	onMount(() => {
+		setTimeout(() => {
+			getTodos();
+		}, 200);
+	});
 </script>
 
 <div>

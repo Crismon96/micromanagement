@@ -21,7 +21,7 @@ export class ProductController {
     const product = await this.productService.createProduct({ title, image });
     this.client.emit('product_created', product);
 
-    return product;
+admin/src/product/product.controller.spec.ts    return product;
   }
 
   @Get(':id')
