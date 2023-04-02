@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { API } from '../../constants';
 
 	type Todo = {
 		id: number;
@@ -12,13 +13,13 @@
 	let newTodo: string = '';
 
 	async function getTodos() {
-		const response = await fetch('/api/todos');
+		const response = await fetch(`${API}/api/todos`);
 		todos = await response.json();
 	}
 
 	async function addTodo() {
 		if (newTodo.trim()) {
-			const response = await fetch('/api/todos', {
+			await fetch(`${API}/api/todos`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ text: newTodo.trim() })
@@ -31,7 +32,7 @@
 	}
 
 	async function toggleTodo(id: number) {
-		const response = await fetch(`/api/todos/${id}`, {
+		await fetch(`${API}/api/todos/${id}`, {
 			method: 'PATCH'
 		});
 
@@ -39,7 +40,7 @@
 	}
 
 	async function removeTodo(id: number) {
-		await fetch(`/api/todos/${id}`, {
+		await fetch(`${API}/api/todos/${id}`, {
 			method: 'DELETE'
 		});
 		await getTodos();

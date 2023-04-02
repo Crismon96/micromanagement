@@ -8,7 +8,6 @@ services:
       - '8081:8081'
     depends_on:
       - serviceName: mysql
-      - serviceName: rabbitmq
 
   # DATABASES
   mysql:
@@ -26,11 +25,3 @@ services:
       - '3306:3306'
     expose:
       - '3306'
-  rabbitmq:
-    image: 'rabbitmq:3.10-management'
-    ports:
-      - '5672:5672'
-      - '15672:15672'
-    expose:
-      - '5672'
-      - '15672'
