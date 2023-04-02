@@ -21,7 +21,7 @@ USER node
 
 FROM nginx:1.19-alpine
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
