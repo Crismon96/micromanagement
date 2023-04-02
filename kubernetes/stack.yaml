@@ -28,7 +28,7 @@ spec:
       containers:
         - name: admin
           image: 683312808679.dkr.ecr.eu-central-1.amazonaws.com/overengineered-service-admin:latest
-          imagePullPolicy: IfNotPresent
+          # imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service
@@ -60,7 +60,7 @@ spec:
       containers:
         - name: frontend
           image: 683312808679.dkr.ecr.eu-central-1.amazonaws.com/overengineered-frontend:latest
-          imagePullPolicy: IfNotPresent
+          # imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service
@@ -75,6 +75,9 @@ spec:
       targetPort: 3306
   selector:
     app: mysql
+    # set cluster ip to none
+    # https://kubernetes.io/docs/concepts/services-networking/service/#headless-services
+    clusterIP: None
 ---
 apiVersion: apps/v1
 kind: Deployment
