@@ -35,8 +35,8 @@ spec:
             - name: MYSQL_USER
               value: admin
             - name: MYSQL_PASSWORD
-              value: password
+              value: mRi5PUDVsnynzkZHcyF8nDDrqUB9BoRdK3rh0r372usZad6x
             - name: MYSQL_ROOT_PASSWORD
-              value: password
+              value: pLNNkG2ihRNUtTtuzgTFdpdLDNsob33UOFaKDIEk2eOJjNft
           ports:
             - containerPort: 3306

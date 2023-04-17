@@ -10,7 +10,7 @@ import { TodoService } from './product/todo.service';
       host: 'mysql',
       port: 3306,
       username: 'root',
-      password: 'password',
+      password: 'pLNNkG2ihRNUtTtuzgTFdpdLDNsob33UOFaKDIEk2eOJjNft',
       database: 'nest_admin',
       entities: [],
       synchronize: true,
